@@ -106,19 +106,18 @@ if __name__ == "__main__":
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     dataload_dir = os.path.join(BASE_DIR, "dataload")
 
-    # 🚨 1. 输入文件：读取刚才对齐的 ESG 文件
-    input_csv = os.path.join(dataload_dir, "ESGU_1d_with_Sentiment.csv")
+    # 🚨 1. 输入文件：读取刚才对齐的 SPY 文件
+    input_csv = os.path.join(dataload_dir, "SPY_1d_with_Sentiment.csv")
 
     if not os.path.exists(input_csv):
         print(f"[!] 找不到文件！Python 正在这个路径下寻找：{input_csv}")
         exit()
 
-    # 🚨 2. 输出文件夹：抛弃 crypto_data，建立光荣的 esg_data 文件夹！
     output_dir = os.path.join(BASE_DIR, "download_data", "esg_data")
     os.makedirs(output_dir, exist_ok=True)
 
-    # 🚨 3. 终极数据表正名为 ESG_1D_Final.csv
-    output_csv = os.path.join(output_dir, "ESG_1D_Final.csv")
+    # 🚨 2. 终极大盘特征表正名为 SPY_1D_Final.csv
+    output_csv = os.path.join(output_dir, "SPY_1D_Final.csv")
 
-    # 执行提取，大盘日线级别阈值可以设小一点，比如 2% (0.02)
+    # 执行提取，大盘日线级别阈值可以设为 2% (0.02)
     extract_dc_features_1d(input_csv, output_csv, theta=0.02)

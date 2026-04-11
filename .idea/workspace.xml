@@ -4,7 +4,38 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c287dcc8-0673-4130-a74a-85783bdbe622" name="更改" comment="dissertation" />
+    <list default="true" id="c287dcc8-0673-4130-a74a-85783bdbe622" name="更改" comment="dissertation">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data Acquisition/data_downloader.py" beforeDir="false" afterPath="$PROJECT_DIR$/Data Acquisition/data_downloader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data Acquisition/download_sentiment.py" beforeDir="false" afterPath="$PROJECT_DIR$/Data Acquisition/download_sentiment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Feature Engineering/DC_Processor_1d.py" beforeDir="false" afterPath="$PROJECT_DIR$/Feature Engineering/DC_Processor_1d.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Feature Engineering/align_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/Feature Engineering/align_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OOS_Performance.png" beforeDir="false" afterPath="$PROJECT_DIR$/OOS_Performance.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reinforcement Learning &amp; Blind Test/td3_agent.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reinforcement Learning &amp; Blind Test/td3_agent.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reinforcement Learning &amp; Blind Test/tradeEnv.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reinforcement Learning &amp; Blind Test/tradeEnv.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Representation Pre-training/transform_pretrain.py" beforeDir="false" afterPath="$PROJECT_DIR$/Representation Pre-training/transform_pretrain.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataload/ESGU_1d.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataload/ESGU_1d_with_Sentiment.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataload/FNG_Sentiment_1D.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataload/stocks/AAPL_1d.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataload/stocks/AMZN_1d.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataload/stocks/GOOGL_1d.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataload/stocks/JNJ_1d.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataload/stocks/JPM_1d.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataload/stocks/META_1d.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataload/stocks/MSFT_1d.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataload/stocks/NVDA_1d.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataload/stocks/UNH_1d.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataload/stocks/V_1d.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/download_data/esg_data/ESG_1D_Final.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/download_data/esg_data/MUSA_Top10_Panel.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/encoder_pretrained.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/feature_stats.npz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/td3_final_actor.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/td3_final_critic.pth" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/run_hierarchical_backtest.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_hierarchical_backtest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train_rl.py" beforeDir="false" afterPath="$PROJECT_DIR$/train_rl.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,31 +59,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python.DC_Processor.executor": "Run",
-    "Python.DC_Processor_1d.executor": "Run",
-    "Python.MuSAtransformer.executor": "Run",
-    "Python.align_data.executor": "Run",
-    "Python.data_downloader.executor": "Run",
-    "Python.download_sentiment.executor": "Run",
-    "Python.get_crypto_data.executor": "Run",
-    "Python.prepare_musa_data.executor": "Run",
-    "Python.run_env_test.executor": "Run",
-    "Python.run_hierarchical_backtest.executor": "Run",
-    "Python.td3_agent.executor": "Run",
-    "Python.tradeEnv.executor": "Run",
-    "Python.train_rl.executor": "Run",
-    "Python.transform_pretrain (1).executor": "Run",
-    "Python.transform_pretrain.executor": "Run",
-    "Python.transformer.executor": "Run",
-    "Python.transformer_model.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "git-widget-placeholder": "master"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python.DC_Processor.executor&quot;: &quot;Run&quot;,
+    &quot;Python.DC_Processor_1d.executor&quot;: &quot;Run&quot;,
+    &quot;Python.MuSAtransformer.executor&quot;: &quot;Run&quot;,
+    &quot;Python.align_data.executor&quot;: &quot;Run&quot;,
+    &quot;Python.data_downloader.executor&quot;: &quot;Run&quot;,
+    &quot;Python.download_sentiment.executor&quot;: &quot;Run&quot;,
+    &quot;Python.get_crypto_data.executor&quot;: &quot;Run&quot;,
+    &quot;Python.prepare_musa_data.executor&quot;: &quot;Run&quot;,
+    &quot;Python.run_env_test.executor&quot;: &quot;Run&quot;,
+    &quot;Python.run_hierarchical_backtest.executor&quot;: &quot;Run&quot;,
+    &quot;Python.td3_agent.executor&quot;: &quot;Run&quot;,
+    &quot;Python.tradeEnv.executor&quot;: &quot;Run&quot;,
+    &quot;Python.train_rl.executor&quot;: &quot;Run&quot;,
+    &quot;Python.transform_pretrain (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.transform_pretrain.executor&quot;: &quot;Run&quot;,
+    &quot;Python.transformer.executor&quot;: &quot;Run&quot;,
+    &quot;Python.transformer_model.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\python\dissertation\Reinforcement Learning &amp; Blind Test" />
@@ -211,8 +242,27 @@
       <option name="project" value="LOCAL" />
       <updated>1775913513072</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="dissertation">
+      <option name="closed" value="true" />
+      <created>1775913829152</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1775913829152</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="dissertation" />

@@ -55,59 +55,54 @@ class QuantDCEncoder(nn.Module):
 
 
 # =====================================================================
-# 2. TD3 网络的 Actor 与 Critic
+# 2. TD3 网络的 Actor 与 Critic (抗过拟合版)
 # =====================================================================
+# 🚨 核心修改：将 hidden_dim 从 64 降低到 32，限制模型容量
 class Actor(nn.Module):
-    def __init__(self, encoder, hidden_dim=64, action_dim=1):
+    def __init__(self, encoder, hidden_dim=32, action_dim=1):
         super(Actor, self).__init__()
-        self.encoder = encoder
-        # 冻结 Transformer 参数，防止被 RL 的高方差梯度破坏
+        self.encoder = copy.deepcopy(encoder)
         for param in self.encoder.parameters():
-            param.requires_grad = False
+            param.requires_grad = True
 
         self.l1 = nn.Linear(32, hidden_dim)
         self.l2 = nn.Linear(hidden_dim, action_dim)
 
     def forward(self, state_seq):
-        with torch.no_grad():
-            x = self.encoder.input_norm(self.encoder.feature_projection(state_seq))
-            seq_len = x.size(1)
-            mask = torch.tril(torch.ones(seq_len, seq_len)).to(state_seq.device)
-            for layer in self.encoder.layers:
-                x = layer(x, mask=mask)
-            # 取最后一层隐藏状态过线性层得到 32 维特征
-            hidden_feature = self.encoder.prediction_head[0:3](x[:, -1, :])
+        x = self.encoder.input_norm(self.encoder.feature_projection(state_seq))
+        seq_len = x.size(1)
+        mask = torch.tril(torch.ones(seq_len, seq_len)).to(state_seq.device)
+        for layer in self.encoder.layers:
+            x = layer(x, mask=mask)
+        hidden_feature = self.encoder.prediction_head[0:3](x[:, -1, :])
 
         a = F.relu(self.l1(hidden_feature))
-        a = torch.sigmoid(self.l2(a))  # 输出 0~1 的仓位权重
+        a = torch.sigmoid(self.l2(a))
         return a
 
 
 class Critic(nn.Module):
-    def __init__(self, encoder, hidden_dim=64, action_dim=1):
+    def __init__(self, encoder, hidden_dim=32, action_dim=1):
         super(Critic, self).__init__()
-        self.encoder = encoder
+        self.encoder = copy.deepcopy(encoder)
         for param in self.encoder.parameters():
-            param.requires_grad = False
+            param.requires_grad = True
 
-        # Q1 网络
         self.l1 = nn.Linear(32 + action_dim, hidden_dim)
         self.l2 = nn.Linear(hidden_dim, hidden_dim)
         self.l3 = nn.Linear(hidden_dim, 1)
 
-        # Q2 网络 (用于缓解高估)
         self.q2_l1 = nn.Linear(32 + action_dim, hidden_dim)
         self.q2_l2 = nn.Linear(hidden_dim, hidden_dim)
         self.q2_l3 = nn.Linear(hidden_dim, 1)
 
     def forward(self, state_seq, action):
-        with torch.no_grad():
-            x = self.encoder.input_norm(self.encoder.feature_projection(state_seq))
-            seq_len = x.size(1)
-            mask = torch.tril(torch.ones(seq_len, seq_len)).to(state_seq.device)
-            for layer in self.encoder.layers:
-                x = layer(x, mask=mask)
-            hidden_feature = self.encoder.prediction_head[0:3](x[:, -1, :])
+        x = self.encoder.input_norm(self.encoder.feature_projection(state_seq))
+        seq_len = x.size(1)
+        mask = torch.tril(torch.ones(seq_len, seq_len)).to(state_seq.device)
+        for layer in self.encoder.layers:
+            x = layer(x, mask=mask)
+        hidden_feature = self.encoder.prediction_head[0:3](x[:, -1, :])
 
         sa = torch.cat([hidden_feature, action], 1)
 
@@ -121,14 +116,12 @@ class Critic(nn.Module):
         return q1, q2
 
     def Q1(self, state_seq, action):
-        # 仅供 Actor 延迟更新时调用
-        with torch.no_grad():
-            x = self.encoder.input_norm(self.encoder.feature_projection(state_seq))
-            seq_len = x.size(1)
-            mask = torch.tril(torch.ones(seq_len, seq_len)).to(state_seq.device)
-            for layer in self.encoder.layers:
-                x = layer(x, mask=mask)
-            hidden_feature = self.encoder.prediction_head[0:3](x[:, -1, :])
+        x = self.encoder.input_norm(self.encoder.feature_projection(state_seq))
+        seq_len = x.size(1)
+        mask = torch.tril(torch.ones(seq_len, seq_len)).to(state_seq.device)
+        for layer in self.encoder.layers:
+            x = layer(x, mask=mask)
+        hidden_feature = self.encoder.prediction_head[0:3](x[:, -1, :])
 
         sa = torch.cat([hidden_feature, action], 1)
         q1 = F.relu(self.l1(sa))
@@ -137,9 +130,6 @@ class Critic(nn.Module):
         return q1
 
 
-# =====================================================================
-# 3. 序列经验回放池 (Sequence Replay Buffer)
-# =====================================================================
 class ReplayBuffer(object):
     def __init__(self, state_dim=(30, 7), action_dim=1, max_size=int(1e5)):
         self.max_size = max_size
@@ -173,56 +163,43 @@ class ReplayBuffer(object):
         )
 
 
-# =====================================================================
-# 4. TD3 核心算法管理器
-# =====================================================================
 class TD3(object):
-    def __init__(self, encoder_path, action_dim=1, lr=3e-4, discount=0.99, tau=0.005, policy_noise=0.2, noise_clip=0.5,
+    def __init__(self, encoder_path, action_dim=1, lr=1e-4, discount=0.99, tau=0.005, policy_noise=0.2, noise_clip=0.5,
                  policy_freq=2):
-        # 初始化 Encoder 并加载权重
-        self.encoder = QuantDCEncoder(num_features=7).to(device)
-        self.encoder.load_state_dict(torch.load(encoder_path, map_location=device))
-        self.encoder.eval()  # Encoder 永远在 Eval 模式
+        self.base_encoder = QuantDCEncoder(num_features=7).to(device)
+        self.base_encoder.load_state_dict(torch.load(encoder_path, map_location=device))
 
-        self.actor = Actor(self.encoder, action_dim=action_dim).to(device)
+        self.actor = Actor(self.base_encoder, action_dim=action_dim).to(device)
         self.actor_target = copy.deepcopy(self.actor)
-        self.actor_optimizer = torch.optim.Adam(self.actor.parameters(), lr=lr)
+        # 🚨 核心修改：加入 weight_decay=1e-4，强迫模型抗过拟合
+        self.actor_optimizer = torch.optim.Adam(self.actor.parameters(), lr=lr, weight_decay=1e-4)
 
-        self.critic = Critic(self.encoder, action_dim=action_dim).to(device)
+        self.critic = Critic(self.base_encoder, action_dim=action_dim).to(device)
         self.critic_target = copy.deepcopy(self.critic)
-        self.critic_optimizer = torch.optim.Adam(self.critic.parameters(), lr=lr)
+        self.critic_optimizer = torch.optim.Adam(self.critic.parameters(), lr=lr, weight_decay=1e-4)
 
         self.discount = discount
         self.tau = tau
         self.policy_noise = policy_noise
         self.noise_clip = noise_clip
         self.policy_freq = policy_freq
-
         self.total_it = 0
 
     def select_action(self, state):
-        # 用于与环境交互，输入 state 为 Numpy 数组
         state = torch.FloatTensor(state).unsqueeze(0).to(device)
         return self.actor(state).cpu().data.numpy().flatten()
 
     def train(self, replay_buffer, batch_size=256):
         self.total_it += 1
-
-        # 1. 采样一个 Batch 的历史数据
         state, action, reward, next_state, not_done = replay_buffer.sample(batch_size)
 
         with torch.no_grad():
-            # 2. 目标策略平滑 (Target Policy Smoothing) - 给 action 加点噪音防止过拟合
             noise = (torch.randn_like(action) * self.policy_noise).clamp(-self.noise_clip, self.noise_clip)
-            # 由于我们的仓位权重在 0~1 之间，所以 action 加上 noise 后必须 clamp 在 [0, 1]
             next_action = (self.actor_target(next_state) + noise).clamp(0.0, 1.0)
-
-            # 3. 计算双 Q 网络的目标值
             target_Q1, target_Q2 = self.critic_target(next_state, next_action)
             target_Q = torch.min(target_Q1, target_Q2)
             target_Q = reward + not_done * self.discount * target_Q
 
-        # 4. 更新 Critic 网络
         current_Q1, current_Q2 = self.critic(state, action)
         critic_loss = F.mse_loss(current_Q1, target_Q) + F.mse_loss(current_Q2, target_Q)
 
@@ -230,15 +207,12 @@ class TD3(object):
         critic_loss.backward()
         self.critic_optimizer.step()
 
-        # 5. 延迟更新 Actor 网络
         if self.total_it % self.policy_freq == 0:
             actor_loss = -self.critic.Q1(state, self.actor(state)).mean()
-
             self.actor_optimizer.zero_grad()
             actor_loss.backward()
             self.actor_optimizer.step()
 
-            # 6. 软更新 Target 网络 (EMA)
             for param, target_param in zip(self.critic.parameters(), self.critic_target.parameters()):
                 target_param.data.copy_(self.tau * param.data + (1 - self.tau) * target_param.data)
 
@@ -254,41 +228,3 @@ class TD3(object):
         self.actor.load_state_dict(torch.load(filename + "_actor.pth", map_location=device))
         self.critic_target = copy.deepcopy(self.critic)
         self.actor_target = copy.deepcopy(self.actor)
-
-
-# =================测试=================
-if __name__ == "__main__":
-    import os
-
-    print("===========================================")
-    print("    正在测试 TD3 核心强化学习框架")
-    print("===========================================")
-
-    # 指向你刚才预训练好的权重
-    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    encoder_path = os.path.join(BASE_DIR,"dissertation", "../transformer", "models", "encoder_pretrained.pth")
-
-    if not os.path.exists(encoder_path):
-        print(f"[!] 请先完成预训练，或者确认预训练权重在此路径: {encoder_path}")
-    else:
-        # 1. 实例化 TD3
-        agent = TD3(encoder_path=encoder_path, action_dim=1)
-        print("✅ TD3 Agent 初始化成功 (已冻结 Transformer 参数)")
-
-        # 2. 模拟环境状态观测 (30天，7个特征)
-        dummy_state = np.random.randn(30, 7)
-
-        # 3. 动作选择测试
-        action = agent.select_action(dummy_state)
-        print(f"✅ Select Action 测试成功 | 建议 BTC 仓位: {action[0]:.4f}")
-
-        # 4. 经验回放池测试
-        buffer = ReplayBuffer(state_dim=(30, 7), action_dim=1)
-        for _ in range(300):
-            buffer.add(dummy_state, action, np.array([1.5]), dummy_state, 0)
-        print(f"✅ Replay Buffer 测试成功 | 当前容量: {buffer.size}")
-
-        # 5. 训练迭代测试
-        agent.train(buffer, batch_size=256)
-        print("✅ Train 迭代测试成功 | Actor 与 Critic 均未报错")
-        print("\n🎉 系统脑机接口已完全打通，随时可以接入 MuSA 交易环境进行实盘推演训练！")

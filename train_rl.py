@@ -9,7 +9,6 @@ import warnings
 import matplotlib.pyplot as plt
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
 rl_folder_path = os.path.join(BASE_DIR, "Reinforcement Learning & Blind Test")
 sys.path.append(rl_folder_path)
 
@@ -20,14 +19,14 @@ warnings.filterwarnings('ignore')
 
 class MockConfig:
     def __init__(self):
-        self.market_name = 'ESG'  # 改为 ESG
+        self.market_name = 'ESG'
         self.mode = 'train'
         self.benchmark_algo = 'equal_weight'
         self.only_long_algo_lst = ['equal_weight']
         self.lambda_1 = 1.0
         self.dailyRetun_lookback = 10
         self.mkt_rf = {'ESG': 0.0}
-        self.annual_steps = 252 # 美股一年交易 252 天
+        self.annual_steps = 252
         self.otherRef_indicator_lst = []
         self.trained_best_model_type = 'max_capital'
         self.reward_scaling = 1.0
@@ -37,7 +36,7 @@ class MockConfig:
 
     def __getattr__(self, item): return [] if 'lst' in item else False
 
-def run_episode(env, agent, replay_buffer, window_size, is_training, episode=0, max_episodes=30):
+def run_episode(env, agent, replay_buffer, window_size, is_training, episode=0, max_episodes=10):
     obs = env.reset()
     done = False
     steps = 0
@@ -52,16 +51,23 @@ def run_episode(env, agent, replay_buffer, window_size, is_training, episode=0, 
     noise_std = 0.0
     if is_training:
         initial_noise = 0.2
-        if episode < max_episodes - 5:
+        if episode < max_episodes - 2:
             noise_std = max(0.01, initial_noise * (1 - episode / (max_episodes * 0.8)))
 
     start_time = time.time()
 
     while not done:
-        if is_training and episode < 2:
+        # 🚨 核心修改：状态迷雾注入 (State Noise Injection)
+        # 在训练时，给模型看到的特征加上 2% 的高斯噪音，防死记硬背
+        if is_training:
+            input_state_seq = current_state_seq + np.random.normal(0, 0.02, size=current_state_seq.shape)
+        else:
+            input_state_seq = current_state_seq
+
+        if is_training and episode < 1:
             action = np.random.uniform(0, 1, size=(1,))
         else:
-            action = agent.select_action(current_state_seq)
+            action = agent.select_action(input_state_seq)
             if noise_std > 0:
                 action = (action + np.random.normal(0, noise_std, size=action.shape)).clip(0, 1)
 
@@ -93,7 +99,6 @@ def plot_and_evaluate(test_env, test_df):
     print("\n================ 正在生成量化评估报告与图表 ================")
 
     dates = pd.to_datetime(test_df['date'].values)
-
     strategy_equity = np.array(test_env.asset_memory)
     strategy_returns = np.array(test_env.portfolio_return_memory)
 
@@ -114,7 +119,7 @@ def plot_and_evaluate(test_env, test_df):
     def calc_sharpe(returns):
         mean_ret = np.mean(returns)
         std_ret = np.std(returns)
-        return (mean_ret / std_ret) * np.sqrt(252) if std_ret > 0 else 0.0 # 美股年化252天
+        return (mean_ret / std_ret) * np.sqrt(252) if std_ret > 0 else 0.0
 
     def calc_mdd(equity_curve):
         running_max = np.maximum.accumulate(equity_curve)
@@ -131,11 +136,10 @@ def plot_and_evaluate(test_env, test_df):
     print(f"📊 [基准持有] 夏普比率: {bm_sharpe:.2f} | 最大回撤: {bm_mdd:.2f}%")
 
     plt.figure(figsize=(12, 6), dpi=300)
+    plt.plot(dates, benchmark_equity, label='Benchmark (Buy & Hold SPY)', color='#808080', alpha=0.8, linewidth=1.5)
+    plt.plot(dates, strategy_equity, label='Anti-Overfit TD3 Strategy', color='#1f77b4', linewidth=2.5)
 
-    plt.plot(dates, benchmark_equity, label='Benchmark (Buy & Hold ESG)', color='#808080', alpha=0.8, linewidth=1.5)
-    plt.plot(dates, strategy_equity, label='MuSA-TD3 Strategy', color='#1f77b4', linewidth=2.5)
-
-    plt.title('Out-of-Sample Performance (2024-2026): MuSA-TD3 vs Benchmark (ESG)', fontsize=16, fontweight='bold', pad=15)
+    plt.title('Out-of-Sample Performance (2024-2026): Regularized TD3 vs Benchmark', fontsize=16, fontweight='bold', pad=15)
     plt.xlabel('Date', fontsize=12)
     plt.ylabel('Portfolio Value (USD)', fontsize=12)
 
@@ -143,11 +147,11 @@ def plot_and_evaluate(test_env, test_df):
     plt.legend(loc='upper left', fontsize=12, frameon=True, shadow=True)
 
     metrics_text = (
-        f"--- MuSA-TD3 Strategy ---\n"
+        f"--- Anti-Overfit TD3 Strategy ---\n"
         f"Total Return: {((strategy_equity[-1] / 100000) - 1) * 100:.1f}%\n"
         f"Sharpe Ratio: {str_sharpe:.2f}\n"
         f"Max Drawdown: {str_mdd:.2f}%\n\n"
-        f"--- Benchmark (ESG) ---\n"
+        f"--- Benchmark (SPY) ---\n"
         f"Total Return: {((benchmark_equity[-1] / 100000) - 1) * 100:.1f}%\n"
         f"Sharpe Ratio: {bm_sharpe:.2f}\n"
         f"Max Drawdown: {bm_mdd:.2f}%"
@@ -164,10 +168,10 @@ def plot_and_evaluate(test_env, test_df):
 
 def main():
     print("==================================================")
-    print("  MuSA + TD3 严谨学术回测 (Train/Test Split)")
+    print("  MuSA + TD3 严谨学术回测 (抗过拟合版)")
     print("==================================================\n")
 
-    data_path = os.path.join(BASE_DIR, "download_data", "esg_data", "ESG_1D_Final.csv")
+    data_path = os.path.join(BASE_DIR, "download_data", "esg_data", "SPY_1D_Final.csv")
     df = pd.read_csv(data_path)
 
     available_features = ['dc_trend', 'dc_event', 'dc_drawdown', 'dc_T', 'dc_TMV', 'dc_R', 'sentiment_score']
@@ -178,20 +182,17 @@ def main():
         stats = np.load(stats_path)
         train_mean = stats['mean']
         train_std = stats['std']
-
         df[available_features] = (df[available_features] - train_mean) / train_std
-        print("[*] ✅ 成功加载 feature_stats.npz，已对 RL 输入特征进行 Z-Score 归一化对齐！")
     else:
-        print("[!] ⚠️ 警告：未找到 feature_stats.npz，RL 模型将接收原始未归一化特征！")
+        print("[!] ⚠️ 警告：未找到 feature_stats.npz！")
 
     split_date = '2024-01-01'
     train_df = df[df['date'] < split_date].copy()
     test_df = df[df['date'] >= split_date].copy()
 
-    print(f"[*] 训练集 (In-Sample): 2018 到 2023, 共 {len(train_df)} 天")
+    print(f"[*] 训练集 (In-Sample): 2010 到 2023, 共 {len(train_df)} 天")
     print(f"[*] 测试集 (Out-of-Sample): 2024 到 2026, 共 {len(test_df)} 天\n")
 
-    # 🚨 核心修改：手续费和滑点降至真实美股水平 (万分之一)
     train_env = StockPortfolioEnv(
         config=MockConfig(), rawdata=train_df, mode='train', stock_num=1,
         action_dim=1, tech_indicator_lst=available_features,
@@ -210,7 +211,8 @@ def main():
     window_size = 30
     replay_buffer = ReplayBuffer(state_dim=(window_size, len(available_features)), action_dim=1)
 
-    max_episodes = 20
+    # 🚨 核心修改：将训练轮数减半至 10 轮
+    max_episodes = 10
     print("================ 阶段 1：在历史数据中训练 ================")
     for ep in range(max_episodes):
         print(f"[*] 训练 Episode {ep + 1}/{max_episodes}...")
@@ -223,7 +225,7 @@ def main():
     start_price = test_df['close'].iloc[0]
     end_price = test_df['close'].iloc[-1]
     bh_return = ((end_price - start_price) / start_price) * 100
-    print(f"[*] 基准挑战：同期 ESG 持有不动收益率为 {bh_return:+.2f}%\n")
+    print(f"[*] 基准挑战：同期 SPY 持有不动收益率为 {bh_return:+.2f}%\n")
 
     run_episode(test_env, agent, replay_buffer, window_size, is_training=False)
 

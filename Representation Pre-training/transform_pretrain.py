@@ -66,7 +66,7 @@ class QuantDCEncoder(nn.Module):
 
 def prepare_pretrain_data(window_size=30):
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    btc_path = os.path.join(BASE_DIR, "download_data", "esg_data", "ESG_1D_Final.csv")
+    btc_path = os.path.join(BASE_DIR, "download_data", "esg_data", "SPY_1D_Final.csv")
 
     if not os.path.exists(btc_path):
         print(f"[!] 找不到文件: {btc_path}")

@@ -6,13 +6,13 @@ import yfinance as yf
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 CONFIG = {
-    "START_TIME": "2018-01-01",
+    "START_TIME": "2010-01-01",
     "END_TIME": datetime.datetime.now().strftime("%Y-%m-%d"),
     "DATA_ROOT": os.path.join(BASE_DIR, "dataload"),
 }
 
 # 🧠 宏观大盘指数 (供 TD3 择时使用)
-MACRO_INDEX = "ESGU"
+MACRO_INDEX = "SPY"
 
 # 🧠 微观股票池 (供 MUSA 选股使用) - 这里选取标普500中权重最大的10只蓝筹/科技股
 MICRO_STOCKS = ['AAPL', 'MSFT', 'NVDA', 'GOOGL', 'AMZN', 'META', 'UNH', 'JNJ', 'JPM', 'V']

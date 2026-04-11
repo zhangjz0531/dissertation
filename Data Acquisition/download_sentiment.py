@@ -2,13 +2,18 @@ import yfinance as yf
 import pandas as pd
 import numpy as np
 import os
+import datetime
 
 def fetch_vix_sentiment():
     print("[+] 正在从 Yahoo Finance 获取传统市场恐慌指数 (VIX)...")
 
-    # 获取与主流数据集匹配的时间段
-    vix = yf.download("^VIX", start="2018-01-01", end="2026-04-11")
+    # 🚨 核心修复：与 data_downloader 保持绝对对齐的动态起止时间
+    start_time = "2010-01-01"
+    end_time = datetime.datetime.now().strftime("%Y-%m-%d")
 
+    vix = yf.download("^VIX", start=start_time, end=end_time)
+
+    # 兼容 yfinance 0.2.x 版本的 MultiIndex 列名
     if isinstance(vix.columns, pd.MultiIndex):
         vix.columns = [col[0] for col in vix.columns]
 
@@ -16,6 +21,7 @@ def fetch_vix_sentiment():
     vix.rename(columns={'Date': 'date', 'Close': 'vix_value'}, inplace=True)
     vix['date'] = vix['date'].dt.strftime('%Y-%m-%d')
 
+    # 🧠 金融情绪映射逻辑 (VIX -> Sentiment Score)
     vix['vix_value'] = vix['vix_value'].clip(10, 40)
     vix['sentiment_score'] = 1.0 - 2.0 * ((vix['vix_value'] - 10) / 30.0)
 
