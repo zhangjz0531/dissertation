@@ -6,20 +6,23 @@ import torch.nn.functional as F
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+# 🚨 统一特征维度为 11 (融合了 DC 与 四大分析师情报)
+NUM_FEATURES = 11
+
 
 # =====================================================================
-# 1. 预训练的 Transformer 架构 (特征提取器)
+# 1. 预训练的 Transformer 架构 (研究团队的评估逻辑)
 # =====================================================================
 class StableTransformerLayer(nn.Module):
     def __init__(self, d_model, nhead, dropout=0.2):
         super().__init__()
-        self.nhead = nhead;
+        self.nhead = nhead
         self.head_dim = d_model // nhead
-        self.q_proj = nn.Linear(d_model, d_model);
+        self.q_proj = nn.Linear(d_model, d_model)
         self.k_proj = nn.Linear(d_model, d_model)
-        self.v_proj = nn.Linear(d_model, d_model);
+        self.v_proj = nn.Linear(d_model, d_model)
         self.out_proj = nn.Linear(d_model, d_model)
-        self.norm1 = nn.LayerNorm(d_model);
+        self.norm1 = nn.LayerNorm(d_model)
         self.norm2 = nn.LayerNorm(d_model)
         self.ffn = nn.Sequential(nn.Linear(d_model, d_model * 4), nn.GELU(), nn.Dropout(dropout),
                                  nn.Linear(d_model * 4, d_model))
@@ -41,7 +44,7 @@ class StableTransformerLayer(nn.Module):
 
 
 class QuantDCEncoder(nn.Module):
-    def __init__(self, num_features=7, d_model=64, nhead=8, num_layers=2):
+    def __init__(self, num_features=NUM_FEATURES, d_model=64, nhead=8, num_layers=2):
         super().__init__()
         self.feature_projection = nn.Linear(num_features, d_model)
         self.input_norm = nn.LayerNorm(d_model)
@@ -50,14 +53,13 @@ class QuantDCEncoder(nn.Module):
             nn.LayerNorm(d_model),
             nn.Linear(d_model, 32),
             nn.GELU(),
-            nn.Linear(32, 2)
+            nn.Linear(32, 1)  # 修改为输出单一标量防报错
         )
 
 
 # =====================================================================
-# 2. TD3 网络的 Actor 与 Critic (抗过拟合版)
+# 2. TD3 网络的 Actor(组合经理) 与 Critic(风控评估)
 # =====================================================================
-# 🚨 核心修改：将 hidden_dim 从 64 降低到 32，限制模型容量
 class Actor(nn.Module):
     def __init__(self, encoder, hidden_dim=32, action_dim=1):
         super(Actor, self).__init__()
@@ -131,7 +133,8 @@ class Critic(nn.Module):
 
 
 class ReplayBuffer(object):
-    def __init__(self, state_dim=(30, 7), action_dim=1, max_size=int(1e5)):
+    # 🚨 升级经验池的输入维度为 11
+    def __init__(self, state_dim=(30, NUM_FEATURES), action_dim=1, max_size=int(1e5)):
         self.max_size = max_size
         self.ptr = 0
         self.size = 0
@@ -166,12 +169,11 @@ class ReplayBuffer(object):
 class TD3(object):
     def __init__(self, encoder_path, action_dim=1, lr=1e-4, discount=0.99, tau=0.005, policy_noise=0.2, noise_clip=0.5,
                  policy_freq=2):
-        self.base_encoder = QuantDCEncoder(num_features=7).to(device)
+        self.base_encoder = QuantDCEncoder(num_features=NUM_FEATURES).to(device)
         self.base_encoder.load_state_dict(torch.load(encoder_path, map_location=device))
 
         self.actor = Actor(self.base_encoder, action_dim=action_dim).to(device)
         self.actor_target = copy.deepcopy(self.actor)
-        # 🚨 核心修改：加入 weight_decay=1e-4，强迫模型抗过拟合
         self.actor_optimizer = torch.optim.Adam(self.actor.parameters(), lr=lr, weight_decay=1e-4)
 
         self.critic = Critic(self.base_encoder, action_dim=action_dim).to(device)

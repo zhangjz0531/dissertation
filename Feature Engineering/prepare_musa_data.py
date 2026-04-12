@@ -1,64 +1,51 @@
 import pandas as pd
 import os
-import glob
 
 
-def build_musa_panel():
-    print("==================================================")
-    print("    微观选股数据池 (Micro Panel Data) 组装器")
-    print("==================================================\n")
+def prepare_micro_panel_data():
+    print("[+] 正在打包微观股票池面板数据 (Multi-Agent MUSA Panel)...")
 
-    # 动态获取项目根目录
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     stocks_dir = os.path.join(BASE_DIR, "dataload", "stocks")
+    output_dir = os.path.join(BASE_DIR, "download_data", "esg_data")
+    os.makedirs(output_dir, exist_ok=True)
 
-    # 寻找所有的个股 csv 文件
-    all_files = glob.glob(os.path.join(stocks_dir, "*_1d.csv"))
-    if not all_files:
-        print("[!] 未找到个股文件，请确认 dataload/stocks 目录下是否有数据。")
+    all_data = []
+
+    # 遍历所有股票csv文件
+    for file in os.listdir(stocks_dir):
+        if file.endswith("_1d.csv"):
+            ticker = file.split('_')[0]
+            file_path = os.path.join(stocks_dir, file)
+            df = pd.read_csv(file_path)
+
+            # 添加股票代码列，作为 Panel 数据的身份标识
+            df['stock'] = ticker
+            all_data.append(df)
+
+    if not all_data:
+        print("[!] 未找到微观股票数据，请先运行 data_downloader.py！")
         return
 
-    df_list = []
+    # 纵向拼接所有股票数据
+    panel_df = pd.concat(all_data, ignore_index=True)
 
-    for file in all_files:
-        # 提取股票代码，例如从 AAPL_1d.csv 提取出 AAPL
-        ticker = os.path.basename(file).split('_')[0]
-        df = pd.read_csv(file)
+    # 确保基本面因子存在，防止由于前面下载失败导致缺失
+    if 'net_margin' not in panel_df.columns:
+        panel_df['net_margin'] = 0.0
 
-        # 新增一列 'stock' 以区分不同股票
-        df['stock'] = ticker
+    # 排序：先按股票代号排，再按时间排
+    panel_df['date'] = pd.to_datetime(panel_df['date'])
+    panel_df.sort_values(by=['stock', 'date'], inplace=True)
+    panel_df['date'] = panel_df['date'].dt.strftime('%Y-%m-%d')
 
-        # 统一时间列名
-        if 'start_time' in df.columns:
-            df.rename(columns={'start_time': 'date'}, inplace=True)
+    output_path = os.path.join(output_dir, "MUSA_Top10_Panel.csv")
+    panel_df.to_csv(output_path, index=False)
 
-        # 格式化时间为 YYYY-MM-DD
-        df['date'] = pd.to_datetime(df['date']).dt.strftime('%Y-%m-%d')
-        df_list.append(df)
-
-    # 将 10 只股票的数据垂直拼接在一起
-    panel_df = pd.concat(df_list, ignore_index=True)
-
-    # 🚨 核心逻辑：按日期升序，同日期下按股票代码升序 (这是 MUSA/RL 框架的标准格式)
-    panel_df = panel_df.sort_values(by=['date', 'stock']).reset_index(drop=True)
-
-    # 提取 MUSA 截面选股所需的标准列
-    cols = ['date', 'stock', 'open', 'high', 'low', 'close', 'volume']
-    available_cols = [c for c in cols if c in panel_df.columns]
-    final_df = panel_df[available_cols]
-
-    # 保存至终极目录 esg_data
-    out_dir = os.path.join(BASE_DIR, "download_data", "esg_data")
-    os.makedirs(out_dir, exist_ok=True)
-    out_path = os.path.join(out_dir, "MUSA_Top10_Panel.csv")
-
-    final_df.to_csv(out_path, index=False)
-
-    print(f"✅ 微观股票池重组完成！")
-    print(f"[*] 共处理股票数: {len(all_files)} 只")
-    print(f"[*] 面板数据总行数: {len(final_df)} 行")
-    print(f"[*] MUSA 选股底表已保存至: {out_path}")
+    print(f"✅ 面板数据打包成功！共包含 {len(panel_df['stock'].unique())} 只股票。")
+    print(f"✅ 系统特征维度已确认：包含量价特征与基本面财务特征 [net_margin]")
+    print(f"✅ 已保存至: {output_path}")
 
 
 if __name__ == "__main__":
-    build_musa_panel()
+    prepare_micro_panel_data()

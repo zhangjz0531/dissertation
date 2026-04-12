@@ -5,9 +5,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c287dcc8-0673-4130-a74a-85783bdbe622" name="更改" comment="dissertation">
-      <change afterPath="$PROJECT_DIR$/run_ablation_study.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data Acquisition/analyst_fundamental.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data Acquisition/analyst_news.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data Acquisition/analyst_sentiment.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data Acquisition/analyst_technical.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data Acquisition/data_engineering_agent.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Data Acquisition/download_macro_news_agent.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Researcher Team/transform_pretrain.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/trade _agent/mas_trader_execution.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dissertation_Final_Chart.png" beforeDir="false" afterPath="$PROJECT_DIR$/Dissertation_Final_Chart.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Data Acquisition/data_downloader.py" beforeDir="false" afterPath="$PROJECT_DIR$/Data Acquisition/data_downloader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Feature Engineering/prepare_musa_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/Feature Engineering/prepare_musa_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reinforcement Learning &amp; Blind Test/td3_agent.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reinforcement Learning &amp; Blind Test/td3_agent.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataload/FNG_Sentiment_1D.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataload/SPY_1d.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataload/SPY_1d_with_Sentiment.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataload/stocks/AAPL_1d.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataload/stocks/AMZN_1d.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataload/stocks/GOOGL_1d.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataload/stocks/JNJ_1d.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataload/stocks/JPM_1d.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataload/stocks/META_1d.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataload/stocks/MSFT_1d.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataload/stocks/NVDA_1d.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataload/stocks/UNH_1d.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataload/stocks/V_1d.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/download_data/esg_data/MUSA_Top10_Panel.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/download_data/esg_data/SPY_1D_Final.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/encoder_pretrained.pth" beforeDir="false" afterPath="$PROJECT_DIR$/models/encoder_pretrained.pth" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/feature_stats.npz" beforeDir="false" afterPath="$PROJECT_DIR$/models/feature_stats.npz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/td3_final_actor.pth" beforeDir="false" afterPath="$PROJECT_DIR$/models/td3_final_actor.pth" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/td3_final_critic.pth" beforeDir="false" afterPath="$PROJECT_DIR$/models/td3_final_critic.pth" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run_ablation_study.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_ablation_study.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train_rl.py" beforeDir="false" afterPath="$PROJECT_DIR$/Reinforcement Learning &amp; Blind Test/train_rl.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,18 +54,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "zhangjz0531"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;zhangjz0531&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/zhangjz0531/dissertation",
-    "accountId": "48221cb2-066d-4d46-a22b-389c2a9267c5"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/zhangjz0531/dissertation&quot;,
+    &quot;accountId&quot;: &quot;48221cb2-066d-4d46-a22b-389c2a9267c5&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
@@ -51,9 +81,14 @@
     "Python.DC_Processor_1d.executor": "Run",
     "Python.MuSAtransformer.executor": "Run",
     "Python.align_data.executor": "Run",
+    "Python.analyst_fundamental.executor": "Run",
+    "Python.analyst_team.executor": "Run",
     "Python.data_downloader.executor": "Run",
+    "Python.data_engineering_agent.executor": "Run",
+    "Python.download_macro_news_agent.executor": "Run",
     "Python.download_sentiment.executor": "Run",
     "Python.get_crypto_data.executor": "Run",
+    "Python.mas_trader_execution.executor": "Run",
     "Python.prepare_musa_data.executor": "Run",
     "Python.run_ablation_study.executor": "Run",
     "Python.run_env_test.executor": "Run",
@@ -67,20 +102,22 @@
     "Python.transformer_model.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "git-widget-placeholder": "main"
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "run.code.analysis.last.selected.profile": "pProject Default"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\python\dissertation\Reinforcement Learning &amp; Blind Test" />
+      <recent name="D:\python\dissertation\Data Acquisition" />
       <recent name="D:\python\dissertation\Representation Pre-training" />
       <recent name="D:\python\dissertation\Feature Engineering" />
-      <recent name="D:\python\dissertation\Data Acquisition" />
       <recent name="D:\python\dissertation\models" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.run_ablation_study">
-    <configuration name="prepare_musa_data" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.mas_trader_execution">
+    <configuration name="data_engineering_agent" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="dissertation" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -89,12 +126,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Feature Engineering" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Data Acquisition" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Feature Engineering/prepare_musa_data.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Data Acquisition/data_engineering_agent.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -103,7 +140,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="run_ablation_study" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="mas_trader_execution" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="dissertation" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -112,12 +149,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/trade _agent" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/run_ablation_study.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/trade _agent/mas_trader_execution.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -126,7 +163,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="run_hierarchical_backtest" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="td3_agent" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="dissertation" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -135,12 +172,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Reinforcement Learning &amp; Blind Test" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/run_hierarchical_backtest.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Reinforcement Learning &amp; Blind Test/td3_agent.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -158,12 +195,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Reinforcement Learning &amp; Blind Test" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/train_rl.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Reinforcement Learning &amp; Blind Test/train_rl.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -181,12 +218,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Representation Pre-training" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Researcher Team" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="RUN_TOOL" value="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Representation Pre-training/transform_pretrain.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Researcher Team/transform_pretrain.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -197,11 +234,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.run_ablation_study" />
-        <item itemvalue="Python.run_hierarchical_backtest" />
+        <item itemvalue="Python.mas_trader_execution" />
         <item itemvalue="Python.train_rl" />
         <item itemvalue="Python.transform_pretrain" />
-        <item itemvalue="Python.prepare_musa_data" />
+        <item itemvalue="Python.td3_agent" />
+        <item itemvalue="Python.data_engineering_agent" />
       </list>
     </recent_temporary>
   </component>
@@ -252,7 +289,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775919085727</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="dissertation">
+      <option name="closed" value="true" />
+      <created>1775925860959</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1775925860959</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
