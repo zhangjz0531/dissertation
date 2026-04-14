@@ -1,0 +1,18 @@
+{
+  "n_folds": 20,
+  "selected_constraints_satisfied_rate": 1.0,
+  "positive_selected_test_cumret_rate": 0.8,
+  "positive_fixed_test_cumret_rate": 0.6,
+  "selected_test_cumret_mean": 0.1020756171793876,
+  "selected_test_cumret_std": 0.15830649436615718,
+  "selected_test_sharpe_mean": 1.0009970152794097,
+  "selected_test_sharpe_std": 1.0654537775529578,
+  "selected_test_mdd_mean": -0.11190532233168786,
+  "selected_test_mdd_std": 0.08054571970262552,
+  "selected_test_auc_mean": 0.5204430304338434,
+  "selected_test_auc_std": 0.04295672252151585,
+  "fixed_test_cumret_mean": 0.05365840932950968,
+  "fixed_test_sharpe_mean": 0.6269257545973228,
+  "fixed_test_mdd_mean": -0.11455613562370312,
+  "selected_matches_fixed_rate": 0.05
+}

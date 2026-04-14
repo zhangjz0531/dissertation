@@ -1,0 +1,13 @@
+{
+  "n_folds": 5,
+  "positive_test_cumret_rate": 1.0,
+  "selected_constraints_satisfied_rate": 1.0,
+  "test_cumret_mean": 0.4795978175347354,
+  "test_cumret_std": 0.38367522803410425,
+  "test_sharpe_mean": 1.5962078212906685,
+  "test_sharpe_std": 0.957266791992082,
+  "test_mdd_mean": -0.1608511429937088,
+  "test_mdd_std": 0.07854429791154628,
+  "test_auc_mean": 0.5122472506040049,
+  "test_auc_std": 0.023539677017079173
+}

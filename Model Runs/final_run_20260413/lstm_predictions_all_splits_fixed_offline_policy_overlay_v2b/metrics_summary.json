@@ -1,0 +1,81 @@
+{
+  "train_summary": {
+    "best_epoch": 4,
+    "best_val_selection_score": -0.09130241466338174
+  },
+  "horizon": 5,
+  "used_state_cols": [
+    "mkt_dc_trend",
+    "mkt_dc_event",
+    "mkt_return_5d",
+    "mkt_volatility_20d",
+    "vix_z_60",
+    "credit_stress",
+    "dc_trend",
+    "dc_event",
+    "dc_tmv",
+    "return_21d_cs_z",
+    "rsi_14_cs_z",
+    "macd_hist_pct_cs_z"
+  ],
+  "state_dim": 26,
+  "action_space": {
+    "0": "cash",
+    "1": "top1_full",
+    "2": "top2_equal"
+  },
+  "base_strategy_definition": {
+    "description": "full top-1 if top1_prob >= base_min_prob else cash",
+    "base_min_prob": 0.62
+  },
+  "class_weights": {
+    "cash": 1.0682687759399414,
+    "top1_full": 0.860230028629303,
+    "top2_equal": 1.0715011358261108
+  },
+  "val_overlay_metrics": {
+    "periods": 101,
+    "cumulative_return": -0.06292156803112614,
+    "annualized_return": -0.03190959509754887,
+    "sharpe": 0.08843587906528824,
+    "max_drawdown": -0.5391412706062311,
+    "win_rate": 0.4752475247524752,
+    "avg_turnover": 1.5643564356435644,
+    "avg_action_exposure_proxy": 0.9504950495049505
+  },
+  "val_base_metrics": {
+    "periods": 101,
+    "cumulative_return": -0.1357239167814348,
+    "annualized_return": -0.07020122888913971,
+    "sharpe": -0.15750088652978592,
+    "max_drawdown": -0.3471706147646283,
+    "win_rate": 0.19801980198019803,
+    "avg_turnover": 0.8316831683168316
+  },
+  "val_excess_cumulative_return": 0.07280234875030867,
+  "test_overlay_metrics": {
+    "periods": 113,
+    "cumulative_return": 0.9064224100575631,
+    "annualized_return": 0.3334682931887205,
+    "sharpe": 0.9569257225873747,
+    "max_drawdown": -0.4200448240541146,
+    "win_rate": 0.504424778761062,
+    "avg_turnover": 1.0,
+    "avg_action_exposure_proxy": 0.9026548672566371
+  },
+  "test_base_metrics": {
+    "periods": 113,
+    "cumulative_return": 0.6013109033754243,
+    "annualized_return": 0.23367215865961954,
+    "sharpe": 0.8599233800739924,
+    "max_drawdown": -0.22298986016985178,
+    "win_rate": 0.21238938053097345,
+    "avg_turnover": 0.336283185840708
+  },
+  "test_excess_cumulative_return": 0.3051115066821388,
+  "notes": [
+    "This is a 3-action offline policy-learning overlay.",
+    "Checkpoint selection is based on validation economic performance, not validation loss alone.",
+    "Use overlay vs base comparison as the dissertation result, not raw action accuracy."
+  ]
+}

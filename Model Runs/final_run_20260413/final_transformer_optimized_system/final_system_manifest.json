@@ -1,0 +1,25 @@
+{
+  "final_system_name": "H5 Transformer v5 final optimized deployable system",
+  "final_decision": "freeze_validation_only_optimized_execution",
+  "base_signal_source": "Transformer v5 fixed predictions",
+  "execution_layer": {
+    "mode": "topk",
+    "top_k": 2,
+    "entry_prob": 0.6,
+    "exit_prob": 0.5599999999999999,
+    "threshold": 0.5,
+    "switch_buffer": 0.0,
+    "min_hold_periods": 2,
+    "max_new_names_per_rebalance": 1
+  },
+  "replaced_previous_frozen_config": {
+    "mode": "topk",
+    "top_k": 3,
+    "min_prob": 0.54,
+    "threshold": 0.5
+  },
+  "transaction_cost_bps": 10.0,
+  "horizon": 5,
+  "optimization_dir": "D:\\python\\dissertation\\Model Runs\\final_run_20260413\\final_execution_optimization_valonly",
+  "selection_policy": "validation_only"
+}

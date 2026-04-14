@@ -1,0 +1,3 @@
+model,delta_test_auc_mean,delta_test_f1_mean,delta_test_strategy_sharpe_mean,delta_test_strategy_cumulative_return_mean,delta_test_strategy_max_drawdown_mean,delta_constraints_rate
+transformer,-0.0024892702578867,0.019882099966741285,0.8063619260171198,0.02203202503489961,-0.011990393906065641,0.0
+lstm,-0.023175051922422085,-0.02290529571802069,0.1447590549472766,0.028240132656828232,0.03782509147280942,0.0

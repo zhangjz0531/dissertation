@@ -1,0 +1,11 @@
+{
+  "data_start_date": "2010-03-31",
+  "data_end_date": "2026-04-02",
+  "n_folds": 21,
+  "n_partial_tail_folds": 1,
+  "first_test_start_date": "2015-10-01",
+  "last_test_end_date": "2026-04-02",
+  "covers_2024_or_later": true,
+  "covers_2025_or_later": true,
+  "covers_2026_or_later": true
+}

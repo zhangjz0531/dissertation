@@ -1,0 +1,66 @@
+{
+  "train_summary": {
+    "best_epoch": 6,
+    "best_val_auc": 0.506173769502827
+  },
+  "val_default_threshold_0_5": {
+    "accuracy": 0.5111776447105788,
+    "precision": 0.5124854142357059,
+    "recall": 0.8591549295774648,
+    "f1": 0.642011401841836,
+    "auc": 0.506173769502827
+  },
+  "test_default_threshold_0_5": {
+    "accuracy": 0.5333919156414763,
+    "precision": 0.5473949965572642,
+    "recall": 0.7773794002607562,
+    "f1": 0.6424242424242425,
+    "auc": 0.5155722763060931
+  },
+  "selected_strategy": {
+    "mode": "topk",
+    "top_k": 2,
+    "min_prob": 0.6,
+    "threshold": 0.5,
+    "constraints_satisfied": true,
+    "val_stats": {
+      "mode": "topk",
+      "top_k": 2,
+      "min_prob": 0.6,
+      "threshold": 0.5,
+      "constraints_ok": true,
+      "periods": 501,
+      "cumulative_return": 0.654061621067743,
+      "annualized_return": 0.28804248711003977,
+      "sharpe": 1.1114342884187869,
+      "max_drawdown": -0.2324506848199901,
+      "win_rate": 0.24151696606786427,
+      "avg_turnover": 0.4530938123752495,
+      "avg_holdings": 0.7904191616766467
+    },
+    "test_stats": {
+      "periods": 569,
+      "cumulative_return": -0.05162769095017794,
+      "annualized_return": -0.023202930852297632,
+      "sharpe": 0.041153660527971744,
+      "max_drawdown": -0.4203107654952448,
+      "win_rate": 0.24956063268892795,
+      "avg_turnover": 0.4024604569420035,
+      "avg_holdings": 0.7346221441124781
+    }
+  },
+  "val_selected_threshold_classification": {
+    "accuracy": 0.493812375249501,
+    "precision": 0.5125,
+    "recall": 0.16040688575899845,
+    "f1": 0.24433849821215733,
+    "auc": 0.506173769502827
+  },
+  "test_selected_threshold_classification": {
+    "accuracy": 0.47328646748681896,
+    "precision": 0.554364471669219,
+    "recall": 0.11799217731421122,
+    "f1": 0.19457135178715398,
+    "auc": 0.5155722763060931
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "overlay_type": "transformer_risk_scaler",
+  "selected_overlay_params": null,
+  "selection_result": "no_valid_overlay_found_use_base",
+  "validation_base_metrics": {
+    "periods": 101,
+    "cumulative_return": 0.057493861748837194,
+    "annualized_return": 0.028288289906912345,
+    "sharpe": 0.23544267874938302,
+    "max_drawdown": -0.23949221643323226,
+    "win_rate": 0.39603960396039606,
+    "avg_turnover": 0.9405940594059405,
+    "avg_action_exposure_proxy": 0.8217821782178217
+  },
+  "test_base_metrics": {
+    "periods": 113,
+    "cumulative_return": 0.4944121961483665,
+    "annualized_return": 0.19623605431349622,
+    "sharpe": 1.1879822783842948,
+    "max_drawdown": -0.21789940651217643,
+    "win_rate": 0.30973451327433627,
+    "avg_turnover": 0.7256637168141593,
+    "avg_action_exposure_proxy": 0.48672566371681414
+  },
+  "notes": "No overlay satisfied the relative-to-base validation constraints. Base strategy should be used."
+}

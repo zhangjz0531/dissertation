@@ -1,0 +1,48 @@
+{
+  "final_system_name": "H5 Transformer v5 final deployable system",
+  "final_decision": "freeze_recommended_deployable_config",
+  "frozen_config": {
+    "mode": "topk",
+    "top_k": 3,
+    "min_prob": 0.54,
+    "threshold": 0.5
+  },
+  "replaced_previous_config": {
+    "mode": "topk",
+    "top_k": 2,
+    "min_prob": 0.6,
+    "threshold": 0.5
+  },
+  "transaction_cost_bps": 10.0,
+  "horizon": 5,
+  "diagnostics_dir": "D:\\python\\dissertation\\Model Runs\\final_run_20260413\\main_experiment_h5_transformer_v5_diagnostics_expanding_tr1260_va126_te126_st126",
+  "coverage_summary": {
+    "data_start_date": "2010-03-31",
+    "data_end_date": "2026-04-02",
+    "n_folds": 21,
+    "n_partial_tail_folds": 1,
+    "first_test_start_date": "2015-10-01",
+    "last_test_end_date": "2026-04-02",
+    "covers_2024_or_later": true,
+    "covers_2025_or_later": true,
+    "covers_2026_or_later": true
+  },
+  "walkforward_overall_summary": {
+    "n_folds": 21,
+    "selected_constraints_satisfied_rate": 1.0,
+    "positive_selected_test_cumret_rate": 0.8095238095238095,
+    "positive_current_fixed_test_cumret_rate": 0.6190476190476191,
+    "selected_test_cumret_mean": 0.11172146931423124,
+    "selected_test_cumret_std": 0.16050479924952296,
+    "selected_test_sharpe_mean": 1.0697640197592893,
+    "selected_test_sharpe_std": 1.085236878982937,
+    "selected_test_mdd_mean": -0.1101954316490685,
+    "selected_test_mdd_std": 0.0788963279460451,
+    "selected_test_auc_mean": 0.5229280171363134,
+    "selected_test_auc_std": 0.04339002588661932,
+    "current_fixed_test_cumret_mean": 0.058344620940611894,
+    "current_fixed_test_sharpe_mean": 0.6648930772501283,
+    "current_fixed_test_mdd_mean": -0.11245513712290592,
+    "selected_matches_current_fixed_rate": 0.047619047619047616
+  }
+}
