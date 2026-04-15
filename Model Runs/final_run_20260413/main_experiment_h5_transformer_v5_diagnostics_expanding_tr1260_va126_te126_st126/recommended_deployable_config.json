@@ -1,7 +1,0 @@
-{
-  "mode": "topk",
-  "top_k": 3,
-  "min_prob": 0.54,
-  "threshold": 0.5,
-  "deployable_score": 4.20286296746045
-}
