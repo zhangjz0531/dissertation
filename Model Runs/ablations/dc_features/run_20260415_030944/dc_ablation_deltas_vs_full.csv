@@ -1,0 +1,2 @@
+variant,delta_test_auc_vs_full,delta_test_f1_vs_full,delta_test_fixed_cumret_vs_full,delta_test_fixed_sharpe_vs_full,delta_test_fixed_mdd_vs_full,delta_test_fixed_turnover_vs_full
+no_dc,-0.01129765266950522,0.0016434376833097675,0.32401397635282625,0.33359633825173163,0.043698004253676426,-0.04385964912280704

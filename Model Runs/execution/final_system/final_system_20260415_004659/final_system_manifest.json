@@ -1,0 +1,52 @@
+{
+  "final_system_name": "H5 Transformer v5 fixed predictions + optimized sticky execution",
+  "source_predictions_path": "D:\\python\\dissertation\\Model Runs\\experiments\\main_transformer_h5\\run_20260414_230240\\transformer_predictions_all_splits.csv",
+  "source_feature_data_path": "D:\\python\\dissertation\\data_acquisition\\cleaned_datasets\\main_experiment_h5.csv",
+  "source_deployable_manifest_path": "D:\\python\\dissertation\\Model Runs\\evaluation\\transformer_deployable\\run_20260415_001238\\final_system_manifest.json",
+  "horizon": 5,
+  "transaction_cost_bps": 10.0,
+  "frozen_prediction_layer": {
+    "mode": "topk",
+    "top_k": 2,
+    "min_prob": 0.54,
+    "threshold": 0.5
+  },
+  "execution_layer": {
+    "mode": "topk",
+    "top_k": 2,
+    "entry_prob": 0.58,
+    "exit_prob": 0.5399999999999999,
+    "threshold": 0.5,
+    "switch_buffer": 0.02,
+    "min_hold_periods": 0,
+    "max_new_names_per_rebalance": 1
+  },
+  "selection_policy": "validation_only",
+  "selection_constraints": {
+    "target_val_mdd_floor": -0.25,
+    "target_val_turnover_cap": 0.75
+  },
+  "best_search_row": {
+    "top_k": 2,
+    "entry_prob": 0.58,
+    "exit_prob": 0.5399999999999999,
+    "exit_gap": 0.04,
+    "switch_buffer": 0.02,
+    "min_hold_periods": 0,
+    "max_new_names_per_rebalance": 1,
+    "mdd_ok": true,
+    "turnover_ok": true,
+    "all_constraints_ok": true,
+    "selection_score": 2.6510342890115655,
+    "val_cumret": 0.4003369712769582,
+    "val_sharpe": 0.8737995799285272,
+    "val_mdd": -0.21532672217555016,
+    "val_turnover": 0.504950495049505,
+    "val_avg_holdings": 1.9504950495049505,
+    "test_cumret": 0.25502265376521405,
+    "test_sharpe": 0.5744033655871844,
+    "test_mdd": -0.2819430699824803,
+    "test_turnover": 0.5789473684210527,
+    "test_avg_holdings": 1.7543859649122806
+  }
+}

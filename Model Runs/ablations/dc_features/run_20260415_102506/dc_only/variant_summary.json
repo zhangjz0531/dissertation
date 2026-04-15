@@ -1,0 +1,41 @@
+{
+  "variant": "dc_only",
+  "n_features": 10,
+  "n_dc_features": 10,
+  "best_epoch": 2,
+  "best_score": 2.161866062193467,
+  "val_classification": {
+    "accuracy": 0.5285429141716567,
+    "precision": 0.5285429141716567,
+    "recall": 1.0,
+    "f1": 0.691564377121964,
+    "auc": 0.5106539595969415
+  },
+  "test_classification": {
+    "accuracy": 0.566077738515901,
+    "precision": 0.566077738515901,
+    "recall": 1.0,
+    "f1": 0.7229241877256317,
+    "auc": 0.49108015174435865
+  },
+  "val_fixed_strategy": {
+    "periods": 101,
+    "cumulative_return": 0.3778230950213308,
+    "annualized_return": 0.17343466762899684,
+    "sharpe": 0.7959317182536205,
+    "max_drawdown": -0.20238032350356938,
+    "win_rate": 0.5445544554455446,
+    "avg_turnover": 1.2376237623762376,
+    "avg_holdings": 2.0
+  },
+  "test_fixed_strategy": {
+    "periods": 114,
+    "cumulative_return": 0.5626851714073529,
+    "annualized_return": 0.21818039711398063,
+    "sharpe": 1.074557764713055,
+    "max_drawdown": -0.16074942273220094,
+    "win_rate": 0.5789473684210527,
+    "avg_turnover": 1.2017543859649122,
+    "avg_holdings": 2.0
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "final_system_name": "H5 Transformer v5 final deployable system",
+  "final_decision": "freeze_recommended_deployable_config",
+  "frozen_config": {
+    "mode": "topk",
+    "top_k": 2,
+    "min_prob": 0.54,
+    "threshold": 0.5
+  },
+  "replaced_previous_config": {
+    "mode": "topk",
+    "top_k": 2,
+    "min_prob": 0.6,
+    "threshold": 0.5
+  },
+  "transaction_cost_bps": 10.0,
+  "horizon": 5,
+  "diagnostics_dir": "D:\\python\\dissertation\\Model Runs\\evaluation\\transformer_deployable\\run_20260415_001238",
+  "coverage_summary": {
+    "data_start_date": "2010-03-31",
+    "data_end_date": "2026-04-06",
+    "n_folds": 21,
+    "n_partial_tail_folds": 1,
+    "first_test_start_date": "2015-10-01",
+    "last_test_end_date": "2026-04-06",
+    "covers_2024_or_later": true,
+    "covers_2025_or_later": true,
+    "covers_2026_or_later": true
+  },
+  "walkforward_overall_summary": {
+    "n_folds": 21,
+    "selected_constraints_satisfied_rate": 0.9523809523809523,
+    "positive_selected_test_cumret_rate": 0.8571428571428571,
+    "positive_current_fixed_test_cumret_rate": 0.7142857142857143,
+    "selected_test_cumret_mean": 0.13409856759682384,
+    "selected_test_cumret_std": 0.155607372030323,
+    "selected_test_sharpe_mean": 1.3911180756813462,
+    "selected_test_sharpe_std": 1.3175246173796713,
+    "selected_test_mdd_mean": -0.11032067269695058,
+    "selected_test_mdd_std": 0.06154005468705195,
+    "selected_test_auc_mean": 0.5223051771271228,
+    "selected_test_auc_std": 0.042110844425160575,
+    "current_fixed_test_cumret_mean": 0.08910300714670434,
+    "current_fixed_test_sharpe_mean": 1.0482380047792665,
+    "current_fixed_test_mdd_mean": -0.0909422194902736,
+    "selected_matches_current_fixed_rate": 0.09523809523809523
+  },
+  "feature_count": 48,
+  "data_path": "D:\\python\\dissertation\\data_acquisition\\cleaned_datasets\\main_experiment_h5.csv",
+  "run_args": {
+    "data_path": "D:\\python\\dissertation\\data_acquisition\\cleaned_datasets\\main_experiment_h5.csv",
+    "out_dir": "D:\\python\\dissertation\\Model Runs\\evaluation\\transformer_deployable",
+    "run_name": "",
+    "seq_len": 30,
+    "batch_size": 256,
+    "lr": 0.0003,
+    "weight_decay": 0.0005,
+    "dropout": 0.2,
+    "max_epochs": 16,
+    "min_epochs": 5,
+    "patience": 4,
+    "d_model": 48,
+    "nhead": 4,
+    "transformer_layers": 1,
+    "pos_weight": 1.0,
+    "train_days": 1260,
+    "val_days": 126,
+    "test_days": 126,
+    "step_days": 126,
+    "walk_mode": "expanding",
+    "max_folds": 0,
+    "allow_partial_last_test": true,
+    "min_partial_test_days": 60,
+    "mode_grid": "topk",
+    "topk_grid": "2,3",
+    "min_prob_grid": "0.54,0.56,0.58,0.60",
+    "threshold_grid": "0.50",
+    "transaction_cost_bps": 10.0,
+    "max_val_drawdown": -0.25,
+    "cost_grid_bps": "5,10,20",
+    "current_fixed_mode": "topk",
+    "current_fixed_top_k": 2,
+    "current_fixed_min_prob": 0.6,
+    "current_fixed_threshold": 0.5,
+    "auc_score_weight": 0.25,
+    "strategy_score_sharpe_weight": 2.0,
+    "strategy_score_cumret_weight": 2.0,
+    "strategy_score_mdd_penalty": 3.0,
+    "strategy_score_turnover_penalty": 0.15,
+    "seed": 42,
+    "mode_grid_list": [
+      "topk"
+    ],
+    "topk_grid_list": [
+      2,
+      3
+    ],
+    "min_prob_grid_list": [
+      0.54,
+      0.56,
+      0.58,
+      0.6
+    ],
+    "threshold_grid_list": [
+      0.5
+    ],
+    "cost_grid_list": [
+      5.0,
+      10.0,
+      20.0
+    ]
+  }
+}

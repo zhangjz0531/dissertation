@@ -1,0 +1,113 @@
+{
+  "cost_bps": 10.0,
+  "source_predictions_path": "D:\\python\\dissertation\\Model Runs\\experiments\\main_transformer_h5\\run_20260414_230240\\transformer_predictions_all_splits.csv",
+  "source_feature_data_path": "D:\\python\\dissertation\\data_acquisition\\cleaned_datasets\\main_experiment_h5.csv",
+  "source_deployable_manifest_path": "D:\\python\\dissertation\\Model Runs\\evaluation\\transformer_deployable\\run_20260415_001238\\final_system_manifest.json",
+  "source_optimized_manifest_path": "D:\\python\\dissertation\\Model Runs\\execution\\final_system\\final_system_20260415_004659\\final_system_manifest.json",
+  "frozen_static_cfg": {
+    "mode": "topk",
+    "top_k": 2,
+    "min_prob": 0.54,
+    "threshold": 0.5
+  },
+  "validation_selected_static_cfg": {
+    "mode": "static_topk",
+    "top_k": 4,
+    "min_prob": 0.54,
+    "threshold": 0.5
+  },
+  "optimized_sticky_cfg": {
+    "mode": "topk",
+    "top_k": 2,
+    "entry_prob": 0.58,
+    "exit_prob": 0.5399999999999999,
+    "threshold": 0.5,
+    "switch_buffer": 0.02,
+    "min_hold_periods": 0,
+    "max_new_names_per_rebalance": 1
+  },
+  "frozen_static_val_metrics": {
+    "periods": 101,
+    "cumulative_return": 0.08849099389135295,
+    "annualized_return": 0.04322013281045156,
+    "sharpe": 0.2949338142024038,
+    "max_drawdown": -0.28471919768224474,
+    "win_rate": 0.504950495049505,
+    "avg_turnover": 0.9801980198019802,
+    "avg_holdings": 2.0,
+    "avg_exposure": 1.0,
+    "avg_max_sector_weight": 0.594059405940594,
+    "avg_distinct_sectors": 1.811881188118812,
+    "nvda_presence_rate": 0.019801980198019802
+  },
+  "frozen_static_test_metrics": {
+    "periods": 114,
+    "cumulative_return": 0.6021467414504735,
+    "annualized_return": 0.23168587273329644,
+    "sharpe": 1.0606463502464871,
+    "max_drawdown": -0.2611769419735527,
+    "win_rate": 0.5964912280701754,
+    "avg_turnover": 1.0263157894736843,
+    "avg_holdings": 1.956140350877193,
+    "avg_exposure": 0.9912280701754386,
+    "avg_max_sector_weight": 0.618421052631579,
+    "avg_distinct_sectors": 1.736842105263158,
+    "nvda_presence_rate": 0.2631578947368421
+  },
+  "validation_selected_static_val_metrics": {
+    "periods": 101,
+    "cumulative_return": 0.3837759386319146,
+    "annualized_return": 0.17596181071581363,
+    "sharpe": 0.8018552149911958,
+    "max_drawdown": -0.2347502870916981,
+    "win_rate": 0.5148514851485149,
+    "avg_turnover": 0.6881188118811881,
+    "avg_holdings": 3.9702970297029703,
+    "avg_exposure": 1.0,
+    "avg_max_sector_weight": 0.5165016501650165,
+    "avg_distinct_sectors": 2.8415841584158414,
+    "nvda_presence_rate": 0.10891089108910891
+  },
+  "validation_selected_static_test_metrics": {
+    "periods": 114,
+    "cumulative_return": 0.7225469598362901,
+    "annualized_return": 0.2717814122026321,
+    "sharpe": 1.2676704516155548,
+    "max_drawdown": -0.23217701141549674,
+    "win_rate": 0.5789473684210527,
+    "avg_turnover": 0.793859649122807,
+    "avg_holdings": 3.7280701754385963,
+    "avg_exposure": 0.9912280701754386,
+    "avg_max_sector_weight": 0.5168128654970761,
+    "avg_distinct_sectors": 2.7719298245614037,
+    "nvda_presence_rate": 0.5
+  },
+  "sticky_val_metrics": {
+    "periods": 101,
+    "cumulative_return": 0.4003369712769582,
+    "annualized_return": 0.18296390320752387,
+    "sharpe": 0.8737995799285272,
+    "max_drawdown": -0.21532672217555016,
+    "win_rate": 0.5346534653465347,
+    "avg_turnover": 0.504950495049505,
+    "avg_holdings": 1.9504950495049505,
+    "avg_exposure": 0.9900990099009901,
+    "avg_max_sector_weight": 0.599009900990099,
+    "avg_distinct_sectors": 1.7722772277227723,
+    "nvda_presence_rate": 0.019801980198019802
+  },
+  "sticky_test_metrics": {
+    "periods": 114,
+    "cumulative_return": 0.25502265376521405,
+    "annualized_return": 0.10564161373625502,
+    "sharpe": 0.5744033655871844,
+    "max_drawdown": -0.2819430699824803,
+    "win_rate": 0.5,
+    "avg_turnover": 0.5789473684210527,
+    "avg_holdings": 1.7543859649122806,
+    "avg_exposure": 0.9385964912280702,
+    "avg_max_sector_weight": 0.6228070175438597,
+    "avg_distinct_sectors": 1.5701754385964912,
+    "nvda_presence_rate": 0.2543859649122807
+  }
+}
