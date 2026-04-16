@@ -1,0 +1,80 @@
+{
+  "mode": "benchmark_aware_active_overlay",
+  "source_final_system_manifest_path": "D:\\python\\dissertation\\Model Runs\\execution\\final_system\\main_final_system\\final_system_manifest.json",
+  "source_predictions_path": "D:\\python\\dissertation\\Model Runs\\experiments\\main_transformer_h5\\main_transformer\\transformer_predictions_all_splits.csv",
+  "source_feature_data_path": "D:\\python\\dissertation\\data_acquisition\\cleaned_datasets\\main_experiment_h5_reduced_v1.csv",
+  "horizon": 5,
+  "transaction_cost_bps": 10.0,
+  "frozen_static_cfg": {
+    "mode": "topk",
+    "top_k": 4,
+    "min_prob": 0.58,
+    "threshold": 0.5
+  },
+  "optimized_sticky_cfg": {
+    "mode": "topk",
+    "top_k": 2,
+    "entry_prob": 0.57,
+    "exit_prob": 0.5599999999999999,
+    "threshold": 0.5,
+    "switch_buffer": 0.005,
+    "min_hold_periods": 0,
+    "max_new_names_per_rebalance": 2
+  },
+  "overlay_cfg": {
+    "mode": "benchmark_aware_active_overlay",
+    "tilt_budget": 0.2,
+    "n_overweight": 4,
+    "n_underweight": 3,
+    "min_weight": 0.02,
+    "max_weight": 0.15,
+    "turnover_cap": 0.4
+  },
+  "selection_policy": "validation_only_vs_equal_weight_buy_hold_benchmark",
+  "validation_benchmark_metrics": {
+    "periods": 101,
+    "cumulative_return": 0.12234544499070266,
+    "annualized_return": 0.05928700351789318,
+    "sharpe": 0.37444013481100674,
+    "max_drawdown": -0.30288634647521906,
+    "win_rate": 0.5148514851485149,
+    "avg_turnover": 0.009900990099009901,
+    "avg_holdings": 10.0,
+    "avg_exposure": 1.0
+  },
+  "best_search_row": {
+    "tilt_budget": 0.2,
+    "n_overweight": 4,
+    "n_underweight": 3,
+    "min_weight": 0.02,
+    "max_weight": 0.15,
+    "turnover_cap": 0.4,
+    "beats_benchmark": true,
+    "mdd_ok": true,
+    "selection_score": 1.6216844223120885,
+    "val_overlay_cumret": 0.23475793968779013,
+    "val_overlay_sharpe": 0.5956926277452369,
+    "val_overlay_mdd": -0.2329546922080855,
+    "val_overlay_turnover": 0.32306525891069476,
+    "val_overlay_avg_holdings": 10.0,
+    "val_overlay_active_share_proxy": 0.16162528207567387,
+    "val_benchmark_cumret": 0.12234544499070266,
+    "val_benchmark_sharpe": 0.37444013481100674,
+    "val_benchmark_mdd": -0.30288634647521906,
+    "active_cumret_gap": 0.11241249469708747,
+    "information_ratio": 1.2293946720248825,
+    "active_win_rate": 0.6237623762376238
+  },
+  "relative_results": {
+    "validation_overlay_vs_benchmark": {
+      "active_cumret_gap": 0.11241249469708747,
+      "active_win_rate": 0.6237623762376238,
+      "information_ratio": 1.2293946720248825
+    },
+    "test_overlay_vs_benchmark": {
+      "active_cumret_gap": 0.028132280118574382,
+      "active_win_rate": 0.45614035087719296,
+      "information_ratio": 0.06412381559536016
+    }
+  }
+}

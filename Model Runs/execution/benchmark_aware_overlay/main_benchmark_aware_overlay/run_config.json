@@ -1,0 +1,18 @@
+{
+  "final_system_manifest_path": "D:\\python\\dissertation\\Model Runs\\execution\\final_system\\main_final_system\\final_system_manifest.json",
+  "predictions_path": "",
+  "feature_data_path": "",
+  "out_dir": "D:\\python\\dissertation\\Model Runs\\execution\\benchmark_aware_overlay",
+  "run_name": "main_benchmark_aware_overlay",
+  "transaction_cost_bps": -1.0,
+  "tilt_budget_grid": "0.05,0.10,0.15,0.20",
+  "n_overweight_grid": "2,3,4",
+  "n_underweight_grid": "2,3,4",
+  "min_weight_grid": "0.00,0.02",
+  "max_weight_grid": "0.15,0.20",
+  "turnover_cap_grid": "0.10,0.20,0.40,1.00",
+  "mdd_floor": -0.3,
+  "resolved_final_system_manifest_path": "D:\\python\\dissertation\\Model Runs\\execution\\final_system\\main_final_system\\final_system_manifest.json",
+  "resolved_predictions_path": "D:\\python\\dissertation\\Model Runs\\experiments\\main_transformer_h5\\main_transformer\\transformer_predictions_all_splits.csv",
+  "resolved_feature_data_path": "D:\\python\\dissertation\\data_acquisition\\cleaned_datasets\\main_experiment_h5_reduced_v1.csv"
+}
